@@ -25,8 +25,8 @@ Follow these steps to set up and work on your project:
 
 Follow these steps for completing your project.
 
-- [ ] Submit a Pull-Request to merge `firstName-lastName` Branch into master on **your fork, don't make Pull Requests against Lambda's repository**.
-- [ ] Please don't merge your own pull request.
+- [x] Submit a Pull-Request to merge `firstName-lastName` Branch into master on **your fork, don't make Pull Requests against Lambda's repository**.
+- [x] Please don't merge your own pull request.
 - [ ] Add your _Team Lead_ as a Reviewer on the Pull-request
 - [ ] Your _Team Lead_ will count the challenge as done by merging the branch into _master_.
 
@@ -38,15 +38,16 @@ Commit your code regularly and use descriptive messages. This helps both you (in
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your Team Lead.
 
-- [ ] Mention two parts of Express that you learned about this week.
-
-- [ ] Describe Middleware?
-
-- [ ] Describe a Resource?
-
-- [ ] What can the API return to help clients know if a request was successful?
-
-- [ ] How can we partition our application into sub-applications?
+- [x] Mention two parts of Express that you learned about this week.
+    - Express is a web application framework that sits on top of the Node.js web server. It's used to add extra functionality, like routing and middleware support, and a simpler API.
+- [x] Describe Middleware?
+    - Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware. Middleware can execute any code, make changes to the request and the response objects, end the request-response cycle, and call the next middleware in the stack.
+- [x] Describe a Resource?
+    - Everything in a RESTful web API is a resource and is accessible with a unique URI which is managed using the CRUD operations.
+- [x] What can the API return to help clients know if a request was successful?
+    - An API can return a HTTP response status code of 200 which means the request was successful.
+- [x] How can we partition our application into sub-applications?
+    - We can do this by using routes within our express application by separating the application into smaller, sub-applications using multiple folders/files.
 
 ## Minimum Viable Product
 
