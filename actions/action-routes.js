@@ -26,6 +26,24 @@ router.get('/:id', validateActionId, (req, res) => {
         .json(req.action);
 });
 
+// POST – CREATE action
+router.post('/', validateAction, (req, res) => {
+    const actionInfo = req.body;
+
+    Actions
+        .insert(actionInfo)
+        .then(action => {
+            res
+                .status(201)
+                .json({ action });
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ message: "Error creating action" });
+        });
+});
+
 // Custom middleware
 function validateActionId(req, res, next) {
     const actionId = req.params.id;
@@ -47,6 +65,28 @@ function validateActionId(req, res, next) {
                 .status(500)
                 .json({ message: "Error retrieving action" })
         });
+}
+
+function validateAction(req, res, next) {
+    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+        res
+            .status(400)
+            .json({ message: "missing action data" });
+    } else if (!req.body.description) {
+        res
+            .status(400)
+            .json({ message: "missing required description field" });
+    } else if (!req.body.notes) {
+        res
+            .status(400)
+            .json({ message: "missing required note field" });
+    } else if (!req.body.project_id) {
+        res
+            .status(400)
+            .json({ message: "missing required project_id field" });
+    } else {
+        next();
+    }
 }
 
 module.exports = router;
