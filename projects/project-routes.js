@@ -26,6 +26,22 @@ router.get('/:id', validateProjectId, (req, res) => {
         .json(req.project);
 });
 
+// GET – READ all actions for a project
+router.get('/:id/actions', validateProjectId, (req, res) => {
+    Projects
+        .getProjectActions(req.project.id)
+        .then(actions => {
+            res
+                .status(200)
+                .json(actions);
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ message: "Error retrieving list of actions" });
+        });
+});
+
 // POST – CREATE new project
 router.post('/', (req, res) => {
     const projectInfo = req.body;
