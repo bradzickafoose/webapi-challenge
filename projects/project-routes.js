@@ -4,6 +4,7 @@ const Projects = require('../data/helpers/projectModel');
 
 // GET – READ all Projects
 router.get('/', (req, res) => {
+
     Projects
         .get()
         .then(projects => {
@@ -28,12 +29,31 @@ router.get('/:id', validateProjectId, (req, res) => {
 // POST – CREATE new project
 router.post('/', (req, res) => {
     const projectInfo = req.body;
+
     Projects
         .insert(projectInfo)
         .then(project => {
             res
                 .status(201)
                 .json({ project });
+        });
+});
+
+// PUT – UPDATE project
+router.put('/:id', validateProjectId, (req, res) => {
+    const updatedProject = req.body;
+
+    Projects
+        .update(req.project.id, updatedProject)
+        .then(project => {
+            res
+                .status(201)
+                .json(project);
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ message: "Error updating project" });
         });
 });
 
