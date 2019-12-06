@@ -11,4 +11,6 @@ server.get("/", (req, res) => {
     res.status(200).send("Hello World");
 });
 
+server.use('/api/projects', projectRoutes);
+
 module.exports = server;

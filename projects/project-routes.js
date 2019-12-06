@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const Projects = require('../data/helpers/projectModel');
 
-// GET all Projects – READ
+// GET – READ all Projects
 router.get('/', (req, res) => {
     Projects
         .get()
@@ -12,15 +12,29 @@ router.get('/', (req, res) => {
                 .json({ projects });
         })
         .catch(err => {
-            res.status(500).json({ message: "Error retrieving projects" });
+            res
+                .status(500)
+                .json({ message: "Error retrieving projects" });
         });
 });
 
-// GET project by id
+// GET – READ project by id
 router.get('/:id', validateProjectId, (req, res) => {
     res
         .status(200)
         .json(req.project);
+});
+
+// POST – CREATE new project
+router.post('/', (req, res) => {
+    const projectInfo = req.body;
+    Projects
+        .insert(projectInfo)
+        .then(project => {
+            res
+                .status(201)
+                .json({ project });
+        });
 });
 
 // Custom middleware
