@@ -44,6 +44,24 @@ router.post('/', validateAction, (req, res) => {
         });
 });
 
+// PUT – UPDATE action
+router.put('/:id', validateActionId, validateAction, (req, res) => {
+    const updatedAction = req.body;
+
+    Actions
+        .update(req.action.id, updatedAction)
+        .then(action => {
+            res
+                .status(201)
+                .json(action);
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ message: "Error updating action" });
+        });
+});
+
 // Custom middleware
 function validateActionId(req, res, next) {
     const actionId = req.params.id;
