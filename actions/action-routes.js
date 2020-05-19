@@ -46,7 +46,9 @@ router.put('/:id', validateActionId, validateAction, (req, res) => {
 router.delete('/:id', validateActionId, (req, res) => {
   Actions
     .remove(req.action.id)
-    .then(action => res.status(200).json(action))
+    .then(action => res.status(200).json(action).send({
+      message: "Action deleted successfully"
+    }))
     .catch(() => res.status(500).json({
       message: "Error deleting action"
     }));
