@@ -8,8 +8,9 @@ router.get('/', (req, res) => {
   Actions
     .get()
     .then(actions => res.status(200).json({ actions }))
-    .catch(() => res.status(500).json({
-        message: "Error retrieving actions"
+    .catch(error => res.status(500).json({
+        message: "Error retrieving actions",
+        error: error.message
     }));
 });
 
@@ -24,9 +25,10 @@ router.post('/', validateAction, (req, res) => {
 
   Actions
     .insert(actionInfo)
-    .then(action => res.status(201).json({ action }))
-    .catch(() => res.status(500).json({
-      message: "Error creating action"
+    .then(action => res.status(201).json(action))
+    .catch(error => res.status(500).json({
+      message: "Error creating action",
+      error: error.message
     }));
 });
 
@@ -37,8 +39,9 @@ router.put('/:id', validateActionId, validateAction, (req, res) => {
   Actions
     .update(req.action.id, updatedAction)
     .then(action => res.status(201).json(action))
-    .catch(() => res.status(500).json({
-      message: "Error updating action"
+    .catch(error => res.status(500).json({
+      message: "Error updating action",
+      error: error.message
     }));
 });
 
@@ -49,8 +52,9 @@ router.delete('/:id', validateActionId, (req, res) => {
     .then(action => res.status(200).json(action).send({
       message: "Action deleted successfully"
     }))
-    .catch(() => res.status(500).json({
-      message: "Error deleting action"
+    .catch(error => res.status(500).json({
+      message: "Error deleting action",
+      error: error.message
     }));
 });
 
@@ -70,9 +74,10 @@ function validateActionId(req, res, next) {
         });
       }
     })
-    .catch(() => {
+    .catch(error => {
       res.status(500).json({
-        message: "Error retrieving action"
+        message: "Error retrieving action",
+        error: error.message
       })
     });
 }
