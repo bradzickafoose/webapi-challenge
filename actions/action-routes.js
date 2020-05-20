@@ -49,7 +49,7 @@ router.put('/:id', validateActionId, validateAction, (req, res) => {
 router.delete('/:id', validateActionId, (req, res) => {
   Actions
     .remove(req.action.id)
-    .then(action => res.status(200).json(action).send({
+    .then(() => res.status(200).json({
       message: "Action deleted successfully"
     }))
     .catch(error => res.status(500).json({
